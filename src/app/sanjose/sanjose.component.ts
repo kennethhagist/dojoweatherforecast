@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sanjose.component.css']
 })
 export class SanjoseComponent implements OnInit {
+  city = 'san jose'
   weather;
   temp;
   maxTemp;
@@ -18,8 +19,7 @@ export class SanjoseComponent implements OnInit {
   constructor(private _weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.weather = this._weatherService.getWeather('sanjose')
-    .then( weather => {
+    this.weather = this._weatherService.getWeather(this.city, (weather) => {
       console.log(weather)
       this.humidity = weather.main.humidity;
       this.temp = weather.main.temp;
@@ -29,7 +29,7 @@ export class SanjoseComponent implements OnInit {
       this.minTemp = weather.main.temp_min;
       this.minTemp = Math.floor(this.minTemp * (9/5) - 459.67);
       this.clouds = weather.weather[0].description;
-      //console.log(this.weather);
+      console.log(this.weather);
     });
   }
 
