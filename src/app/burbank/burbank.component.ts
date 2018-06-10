@@ -13,8 +13,9 @@ export class BurbankComponent implements OnInit {
   maxTemp;
   minTemp;
   humidity;
-  wind;
-  clouds;
+  wind_speed;
+  wind_direction;
+  status;
 
   constructor(private _weatherService: WeatherService) { }
 
@@ -28,7 +29,9 @@ export class BurbankComponent implements OnInit {
       this.maxTemp = Math.floor(this.maxTemp * (9/5) - 459.67);
       this.minTemp = weather.main.temp_min;
       this.minTemp = Math.floor(this.minTemp * (9/5) - 459.67);
-      this.clouds = weather.weather[0].description;
+      this.status = weather.weather[0].main;
+      this.wind_speed = weather.wind.speed;
+      this.wind_direction = weather.wind.deg;
       console.log(this.weather);
     });
   }
